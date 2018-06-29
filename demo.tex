@@ -1,0 +1,692 @@
+% -*- coding: utf-8 -*-
+% vim: set spelllang=en :
+
+\documentclass[10pt, fleqn, dvipsnames]{beamer}
+\usepackage{calc}
+\usepackage{ifpdf}
+\ifpdf
+        \usepackage{xcolor}
+        \usepackage{graphicx}
+        \pdfpageattr{/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+\else
+        \usepackage{xcolor}
+        \usepackage{graphicx}
+\fi
+\pdfcompresslevel=9
+\pdfdecimaldigits=3
+%\pdfpkresolution=600
+%\pdfimageresolution=150
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese,english]{babel}
+\selectlanguage{english}
+%\selectlanguage{portuguese}
+
+%% Fonts with math support
+%% Latin Modern + Latin Modern Sans + Latin Modern Typewriter
+%\usepackage{lmodern}
+%% Palatino
+%\usepackage[sc]{mathpazo}\linespread{1.05} \usepackage{tgpagella}
+%% Times
+%\usepackage{mathptmx} \usepackage{tgtermes}
+%% Times (alternativa)
+%\usepackage{newtxtext,newtxmath} \usepackage{tgtermes}
+%% Helvetica
+%\usepackage[scaled]{helvet} \usepackage{eulervm} \usepackage{tgheros}
+%% Linux Libertine + Linux Biolinum
+\usepackage{libertine} \usepackage[libertine]{newtxmath}
+
+%% Too many math alphabets used in version normal?
+\newcommand{\bmmax}{2}
+\newcommand{\hmmax}{0}
+%% Fontenc
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+
+%%%%%%%%%
+%%
+%% BEAMER CONFIGURATION START
+%%
+%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots} \usepgfplotslibrary{dateplot}
+\usepackage{appendixnumberbeamer}
+
+%% Options for Beamer Theme CVR
+%% Headline with sections/bullets
+%% * showbullets=true/false, shows the number of frames as bullets
+%% * subsection=true/false, shows an extra box with the subsection
+%% Footline with infolines/framenumber 
+%% * infolines=true/false, footline with Short Name/Short Title/Short Date
+%% * framenumber=false/true, show frame number/total frames 
+\usetheme[showbullets=true,subsection=false,infoline=true,framenumber=false]{cvr}
+
+%% Change structure color
+\usecolortheme[RGB={50,80,90}]{structure}
+
+%%%%%%%%%
+%%
+%% BEAMER CONFIGURATION END
+%%
+%%%%%%%%%
+
+
+%%%%%%%%%
+%%
+%% TEXTPOS CONFIGURATION START
+%%
+%%%%%%%%%
+\usepackage[absolute,overlay,quiet]{textpos}
+%\usepackage[absolute,overlay,quiet,showboxes]{textpos}
+%% How to calibrate textpos?
+%%
+%% Read the package with the showboxes option:
+% \usepackage[absolute,overlay,quiet,showboxes]{textpos}
+%%
+%% After, use the following slide somewhere:
+% \begin{frame}
+% \frametitle{Slide textpos calibration}
+% \begin{textblock*}{\slidew}[0,0](0\slidew,0\slideh)
+% \includegraphics[width=\slidew,height=\slideh]{beamericonbook}
+% \end{textblock*}
+% \end{frame}
+%%
+%% From the position of the box, redefine the following dimensions:
+\newlength{\slidew}
+\newlength{\slidexi}
+\setlength{\slidew}{128mm}  % slide dimensions 128x96 mm
+\setlength{\slidexi}{0mm}
+
+\newlength{\slideh}
+\newlength{\slideyi}
+%\setlength{\slideh}{81mm} \setlength{\slideyi}{13mm}  % subsection=true
+\setlength{\slideh}{84mm} \setlength{\slideyi}{10mm}  % subsection=false 
+%%
+%% Lastly, redefine the origin, if needed:
+\textblockorigin{\slidexi}{\slideyi}
+
+%%%%%%%%%
+%%
+%% TEXTPOS CONFIGURATION END
+%%
+%%%%%%%%%
+
+
+%% Bibliography
+\usepackage[round]{natbib}
+%\usepackage[super,square,numbers]{natbib}
+\usepackage{csquotes}  % needed for natbib to work correctly
+
+
+%% Other
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{xspace}
+
+
+
+
+%%%%%%%
+%%
+%% TITLE, AUTHOR, INSTITUTION
+%%
+%%%%%%%
+\title[Short title]{
+This is a very long title
+}
+\date{\today}
+\author{Carlos Veiga Rodrigues}
+\institute[CVR \LaTeX]{CVR \LaTeX Templates}
+\titlegraphic{
+\hskip2mm
+\includegraphics[height=2cm]{logo.pdf}
+\\\vspace*{-.2\slideh}
+}
+
+
+
+%%%%%%%
+%%
+%% DOCUMENT 
+%%
+%%%%%%%
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\setcounter{framenumber}{0}
+\end{frame}
+
+%% For every picture that defines or uses external nodes,
+%% you'll have to apply the 'remember picture' style.
+%% To avoid some typing, we'll apply the style to all pictures.
+\tikzstyle{every picture}+=[remember picture]
+
+%% By default all math in TikZ nodes are set in inline mode.
+%% Change this to displaystyle so that we don't get small fractions.
+\everymath{\displaystyle}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+\frametitle{Motivation}
+
+\begin{itemize}
+\item What are you doing here? \\[.5ex]
+\begin{itemize}
+\small
+\item What is this presentation for?
+\item Why are you wasting the audience time?
+\end{itemize}
+\pause\vskip3ex
+
+\item What are you proposing/studying?
+\begin{itemize}
+\small
+\item How do you plan on getting there
+\item Forças de Coriolis, estratificação térmica
+\end{itemize}
+\pause\vskip3ex
+
+\item How do I know your results are good?
+\begin{itemize}
+\small
+\item What are you comparing against?
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+\frametitle{Contents}
+\footnotesize
+%\tableofcontents[hideallsubsections]
+\tableofcontents
+\end{frame}
+
+
+%%%%%%%
+%%
+%%
+\section{Introduction}
+\subsection{}  % place if there are no subsections to show bullets
+%%
+%%
+%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{CVR \LaTeX Beamer Theme}
+
+The CVR theme is a Beamer theme with minimal visual noise
+inspired by the \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
+Theme} by Benjamin Weiss.
+
+\medskip
+
+Enable the theme by loading:
+{\footnotesize
+\begin{verbatim}
+  \documentclass{beamer}
+  \usetheme{cvr}
+\end{verbatim}
+}
+
+\medskip
+
+Note that there are several options. For the headline:
+\begin{itemize}
+\footnotesize
+\item \texttt{showbullets=true/false}, shows the number of frames as bullets;
+\item \texttt{subsection=true/false}, shows an extra box with the subsection;
+\end{itemize}
+\noindent
+and for the footline:
+\begin{itemize}
+\footnotesize
+\item \texttt{infolines=true/false}, footline with Short Name/Short Title/Short Date
+\item \texttt{framenumber=false/true}, show frame number/total frames
+\end{itemize}
+
+\medskip
+
+These may be enabled or disable by calling these as arguments:
+{\footnotesize
+\begin{verbatim}
+  \usetheme[showbullets=true,subsection=false,
+            infoline=true,framenumber=false]{cvr}
+\end{verbatim}
+}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{About this demo presentation}
+
+\begin{textblock*}{.8\slidew}[.5,.5](.5\slidew,.5\slideh)
+\begin{center}
+
+These slides were mostly based from the demo
+presentation from the Metropolis beamer theme,
+available at:
+
+\url{http://github.com/matze/mtheme}
+\end{center}
+\end{textblock*}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Slide textpos calibration}
+\begin{textblock*}{\slidew}[0,0](0\slidew,0\slideh)
+\includegraphics[width=\slidew,height=\slideh]{beamericonbook}
+\end{textblock*}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Sections}
+  Sections group slides of the same topic
+
+  \begin{verbatim}    \section{Elements}\end{verbatim}
+
+  for which CVR provides a nice progress indicator \ldots
+\end{frame}
+
+
+%%%%%%%
+%%
+%%
+\section{Titleformats}
+\subsection{}  % place if there are no subsections to show bullets
+%%
+%%
+%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{CVR titleformats}
+	CVR supports 4 different titleformats:
+	\begin{itemize}
+		\item Regular
+		\item \textsc{Smallcaps}
+		\item \textsc{allsmallcaps}
+		\item ALLCAPS
+	\end{itemize}
+	They can either be set at once for every title type or individually.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Small caps}
+	This frame uses the \texttt{smallcaps} titleformat.
+
+	\begin{alertblock}{Potential Problems}
+		Be aware, that not every font supports small caps. If for example you typeset your presentation with pdfTeX and the Computer Modern Sans Serif font, every text in smallcaps will be typeset with the Computer Modern Serif font instead.
+	\end{alertblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{All small caps}
+	This frame uses the \texttt{allsmallcaps} titleformat.
+
+	\begin{alertblock}{Potential problems}
+		As this titleformat also uses smallcaps you face the same problems as with the \texttt{smallcaps} titleformat. Additionally this format can cause some other problems. Please refer to the documentation if you consider using it.
+
+		As a rule of thumb: Just use it for plaintext-only titles.
+	\end{alertblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{All caps}
+	This frame uses the \texttt{allcaps} titleformat.
+
+	\begin{alertblock}{Potential Problems}
+		This titleformat is not as problematic as the \texttt{allsmallcaps} format, but basically suffers from the same deficiencies. So please have a look at the documentation if you want to use it.
+	\end{alertblock}
+\end{frame}
+
+
+
+%%%%%%%
+%%
+%%
+\section{Elements}
+\subsection{}  % place if there are no subsections to show bullets
+%%
+%%
+%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Typography}
+      \begin{verbatim}The theme provides sensible defaults to
+\emph{emphasize} text, \alert{accent} parts
+or show \textbf{bold} results.\end{verbatim}
+
+  \begin{center}becomes\end{center}
+
+  The theme provides sensible defaults to \emph{emphasize} text,
+  \alert{accent} parts or show \textbf{bold} results.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Font feature test}
+  \begin{itemize}
+    \item Regular
+    \item \textit{Italic}
+    \item \textsc{SmallCaps}
+    \item \textbf{Bold}
+    \item \textbf{\textit{Bold Italic}}
+    \item \textbf{\textsc{Bold SmallCaps}}
+    \item \texttt{Monospace}
+    \item \texttt{\textit{Monospace Italic}}
+    \item \texttt{\textbf{Monospace Bold}}
+    \item \texttt{\textbf{\textit{Monospace Bold Italic}}}
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lists}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.33\textwidth}
+      Items
+      \begin{itemize}
+        \item Milk \item Eggs \item Potatos
+      \end{itemize}
+
+    \column{0.33\textwidth}
+      Enumerations
+      \begin{enumerate}
+        \item First, \item Second and \item Last.
+      \end{enumerate}
+
+    \column{0.33\textwidth}
+      Descriptions
+      \begin{description}
+        \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
+      \end{description}
+  \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Animation}
+  \begin{itemize}[<+- | alert@+>]
+    \item \alert<4>{This is\only<4>{ really} important}
+    \item Now this
+    \item And now this
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Figures}
+  \begin{figure}
+    \newcounter{density}
+    \setcounter{density}{20}
+    \begin{tikzpicture}
+      \def\couleur{alerted text.fg}
+      \path[coordinate] (0,0)  coordinate(A)
+                  ++( 90:5cm) coordinate(B)
+                  ++(0:5cm) coordinate(C)
+                  ++(-90:5cm) coordinate(D);
+      \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
+      \foreach \x in {1,...,40}{%
+          \pgfmathsetcounter{density}{\thedensity+20}
+          \setcounter{density}{\thedensity}
+          \path[coordinate] coordinate(X) at (A){};
+          \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
+                              -- (C) coordinate[pos=.10](B)
+                              -- (D) coordinate[pos=.10](C)
+                              -- (X) coordinate[pos=.10](D);
+          \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
+      }
+    \end{tikzpicture}
+    \caption{Rotated square from
+    \href{http://www.texample.net/tikz/examples/rotated-polygons/}{texample.net}.}
+  \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Tables}
+  \begin{table}
+    \caption{Largest cities in the world (source: Wikipedia)}
+    \begin{tabular}{@{} lr @{}}
+      \toprule
+      City & Population\\
+      \midrule
+      Mexico City & 20,116,842\\
+      Shanghai & 19,210,000\\
+      Peking & 15,796,450\\
+      Istanbul & 14,160,467\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Blocks}
+  Three different block environments are pre-defined and may be styled with an
+  optional background color.
+
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \begin{block}{Default}
+        Block content.
+      \end{block}
+
+      \begin{alertblock}{Alert}
+        Block content.
+      \end{alertblock}
+
+      \begin{exampleblock}{Example}
+        Block content.
+      \end{exampleblock}
+
+    \column{0.5\textwidth}
+
+      %\metroset{block=fill}
+
+      \begin{block}{Default}
+        Block content.
+      \end{block}
+
+      \begin{alertblock}{Alert}
+        Block content.
+      \end{alertblock}
+
+      \begin{exampleblock}{Example}
+        Block content.
+      \end{exampleblock}
+
+  \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Math}
+  \begin{equation*}
+    e = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
+  \end{equation*}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Line plots}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{axis}[
+        %mlineplot,
+        width=0.9\textwidth,
+        height=6cm,
+      ]
+
+        \addplot {sin(deg(x))};
+        \addplot+[samples=100] {sin(deg(2*x))};
+
+      \end{axis}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Bar charts}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{axis}[
+        %mbarplot,
+        xlabel={Foo},
+        ylabel={Bar},
+        width=0.9\textwidth,
+        height=6cm,
+      ]
+
+      \addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
+      \addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
+      \addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
+
+      \legend{lorem, ipsum, dolor}
+
+      \end{axis}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Quotes}
+  \begin{quote}
+    Veni, Vidi, Vici
+  \end{quote}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{References}
+  Some references to showcase [allowframebreaks] \cite{knuth92,ConcreteMath,Simpson,Er01,greenwade93}
+\end{frame}
+
+
+%%%%%%%
+%%
+%%
+\section{Conclusions}
+\subsection{}  % place if there are no subsections to show bullets
+%%
+%%
+%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Summary}
+
+  Get the source of this theme and the demo presentation from
+
+  \begin{center}\url{github.com/cvr/beamerthemecvr}\end{center}
+
+  The theme \emph{itself} is licensed under the
+  \href{http://www.latex-project.org/lppl/}{\LaTeX Project Public License}.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  Questions?
+\end{frame}
+
+\appendix
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain,fragile]{Backup slides}
+  Sometimes, it is useful to add slides at the end of your presentation to
+  refer to during audience questions.
+
+  The best way to do this is to include the \verb|appendixnumberbeamer|
+  package in your preamble and call \verb|\appendix| before your backup slides.
+
+  CVR will automatically turn off slide numbering and progress bars for
+  slides in the appendix.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain,allowframebreaks]{References}
+
+  \scriptsize
+  \setlength{\bibsep}{2ex}
+  \bibliographystyle{ametsoc2014}
+  \def\newblock{}
+  \bibliography{demo}
+
+\end{frame}
+
+\end{document}

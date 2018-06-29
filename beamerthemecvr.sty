@@ -1,0 +1,150 @@
+%% Copyright 2018 by Carlos Veiga Rodrigues
+%%
+%% This file may be distributed and/or modified
+%% under the LaTeX Project Public License.
+%% For more details see the internet sites:
+%%   http://www.latex-project.org/lppl/
+
+\newif\ifbeamer@head@showbullets
+\DeclareOptionBeamer{showbullets}[true]{\csname beamer@head@showbullets#1\endcsname}
+\ExecuteOptionsBeamer{showbullets=true}
+
+\newif\ifbeamer@head@subsection
+\DeclareOptionBeamer{subsection}[true]{\csname beamer@head@subsection#1\endcsname}
+\ExecuteOptionsBeamer{subsection=true}
+
+\newif\ifbeamer@foot@infoline
+\DeclareOptionBeamer{infoline}[true]{\csname beamer@foot@infoline#1\endcsname}
+\ExecuteOptionsBeamer{infoline=true}
+
+\newif\ifbeamer@foot@framenumber
+\DeclareOptionBeamer{framenumber}[false]{\csname beamer@foot@framenumber#1\endcsname}
+\ExecuteOptionsBeamer{framenumber=false}
+
+\ProcessOptionsBeamer
+
+
+
+
+\mode<presentation>
+
+%% Structure color
+%% http://sigarra.up.pt/feup/pt/WEB_BASE.GERA_PAGINA?p_pagina=242508#
+%% FEUP chromaticism: PANTONE 484, #8C2D19, R 140, G 45, B 25
+\definecolor{FEUPcolor}{RGB}{140,45,25}
+\setbeamercolor{structure}{fg=FEUPcolor}
+
+
+%% Font theme
+\usefonttheme{default}
+%\usefonttheme{professionalfonts}
+%\usefonttheme[onlymath]{serif}  % Use serif fonts in math
+
+
+%% Get footline with Short Name / Short Title / Short Date
+\ifbeamer@foot@infoline
+  \setbeamercolor*{footer infoline}{use=structure, fg=structure.fg!75!black, bg=structure.fg!10!gray!10}
+  \setbeamertemplate{footline}{%
+   \leavevmode%
+   \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=.55ex, center]{footer infoline}
+     %\hspace*{1em}%
+     \insertshortauthor%~(\insertshortinstitute)%
+     \hfill\textbullet\hfill%
+     \insertshorttitle%
+     \hfill\textbullet\hfill%
+     \insertshortdate%
+     %\insertframenumber{}~/~\inserttotalframenumber%
+     %\hspace*{1em}%
+    \end{beamercolorbox}%
+   }%
+   \vskip0pt%
+  }
+\fi
+
+
+%% Show frame number by redefining right sidebar template (where logo is)
+\ifbeamer@foot@framenumber
+  \setbeamertemplate{sidebar right}{
+   \vfill%
+   \llap{\insertlogo\hskip0.1cm}%
+   \vskip2pt%
+   \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+   \vskip2pt%
+   \begingroup\fontsize{2mm}{2.5mm}\selectfont
+   \llap{%
+    \begin{beamercolorbox}[center, wd=10ex, ht=2.3ex, dp=.8ex]{date in head/foot}
+     \strut\insertframenumber{}/\inserttotalframenumber\strut
+    \end{beamercolorbox}\hskip0.1cm}
+   \endgroup
+  }
+\fi
+
+
+%% Headline with sections/bullets
+%% * showbullets=true/false, shows the number of frames as bullets
+%% * subsection=true/false, shows an extra box with the subsection
+\ifbeamer@head@showbullets
+  \ifbeamer@head@subsection
+    \useoutertheme[showbullets=true,subsection=true]{tocbar}
+  \else
+    \useoutertheme[showbullets=true,subsection=false]{tocbar}
+  \fi
+\else
+  \ifbeamer@head@subsection
+    \useoutertheme[showbullets=false,subsection=true]{tocbar}
+  \else
+    \useoutertheme[showbullets=false,subsection=false]{tocbar}
+  \fi
+\fi
+
+
+%% Outer color theme
+\setbeamercolor*{palette primary}{use=structure, fg=white, bg=structure.fg}
+\setbeamercolor*{palette secondary}{use=structure, fg=white, bg=structure.fg!75!black}
+\setbeamercolor*{palette tertiary}{use=structure, fg=white, bg=structure.fg!50!black}
+\setbeamercolor*{palette quaternary}{fg=white, bg=black}
+
+
+%% Headline without subsection and only pagenumbers (no footline)
+\setbeamercolor*{section in head/foot}{parent=palette tertiary}
+\setbeamercolor*{subsection in head/foot}{parent=palette secondary}
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor*{date in head/foot}{use=structure, fg=structure.fg!75!black, bg=structure.fg!80!gray!20}
+
+
+%% Other options
+\setbeamerfont{section in head/foot}{series=\bfseries}
+\setbeamerfont{subsection in head/foot}{series=\bfseries}
+\setbeamersize{text margin left=1em,text margin right=1em}  % Text margins
+\setbeamerfont{frametitle}{size=\large}  % Frame title font size
+\setbeamerfont{block title}{size={}}  % Block title font size
+\beamertemplatenavigationsymbolsempty  % Remove the navigation bar
+%\setbeamertemplate{headline}[default]  % Remove header
+%\setbeamertemplate{footline}[default]  % Remove footer
+%\addtobeamertemplate{headline}{}{\vskip2pt}  % Space between header and title
+%\addtobeamertemplate{footline}{}{\vskip2pt}  % Space between footer and title
+
+
+%% Frametitle block is too big. Redefine template to adjust bounding space
+\setbeamertemplate{frametitle}{
+ \nointerlineskip%
+ \begin{beamercolorbox}[left, vmode, wd=\paperwidth, leftskip=.3cm, rightskip=.3cm plus1fil]{frametitle}
+ \vskip.4ex%
+ \usebeamerfont*{frametitle}\strut\insertframetitle\strut%
+ \end{beamercolorbox}
+}
+
+
+%% Change alerted text color
+\setbeamercolor{alerted text}{use=structure, fg=structure.fg!50!red!99}
+
+
+%% Number sections in TOC
+\setbeamertemplate{section in toc}[sections numbered]
+
+
+%\setbeamerfont{block title}{size={}}
+
+\mode<all>
+
